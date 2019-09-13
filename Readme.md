@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ivan Timofeev](https://up.htmlacademy.ru/javascript/18/user/985277).
-* Наставник: `Неизвестно`.
+* Наставник: Andrey Karyakin.
 
 ---
 

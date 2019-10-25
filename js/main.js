@@ -8,7 +8,7 @@ var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
 var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
 var ADDRESS_IMAGES = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 
-var getSameHotel = function(xx, title, x, y, price, rooms, guests) {
+var getSameHotel = function(xx, title, x, y, price, rooms, guests, description) {
 
   return {
     author: {

@@ -7,6 +7,7 @@ var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
 var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
 var ADDRESS_IMAGES = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
+var SAME_HOTEL_ARRAY = makeSameHotelArray();
 
 
 var getSameHotel = function(idx) {
@@ -36,4 +37,12 @@ var getSameHotel = function(idx) {
       y: y,
     }
   }
+};
+
+var makeSameHotelArray = function() {
+  var array = [];
+  for (var i = 0; i < 8; i++) {
+    array.push(getSameHotel(i));
+  }
+  return array;
 };

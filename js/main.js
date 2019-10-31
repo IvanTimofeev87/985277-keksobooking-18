@@ -39,10 +39,23 @@ var getSameHotel = function(idx) {
   }
 };
 
-var makeSameHotelArray = function() {
+function makeSameHotelArray() {
   var array = [];
   for (var i = 0; i < 8; i++) {
     array.push(getSameHotel(i));
   }
   return array;
 };
+
+var map = document.querySelector('.map');
+map.classList.remove('map--faded');
+
+var similarHotleTemplate = document.querySelector('#pin')
+  .content
+  .querySelector('.map__pin');
+
+for (var i = 0; i < 8; i++) {
+  var hotelElement = similarHotleTemplate.cloneNode(true);
+
+  map.appendChild(hotelElement);
+}

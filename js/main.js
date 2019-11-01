@@ -1,7 +1,3 @@
-var getRandomNumb = function(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-};
-
 var TYPES_HOTEL = ['palace', 'flat', 'house', 'bungalo'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
@@ -9,8 +5,11 @@ var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "co
 var ADDRESS_IMAGES = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 var SAME_HOTEL_ARRAY = makeSameHotelArray();
 
+function getRandomNumb(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+};
 
-var getSameHotel = function(idx) {
+function getSameHotel(idx) {
   var x = getRandomNumb(0, 100);
   var y = getRandomNumb(101, 200)
   return {
@@ -50,12 +49,13 @@ function makeSameHotelArray() {
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
 
-var similarHotleTemplate = document.querySelector('#pin')
+var similarHotelTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
 
 for (var i = 0; i < 8; i++) {
-  var hotelElement = similarHotleTemplate.cloneNode(true);
+  var hotelElement = similarHotelTemplate.cloneNode(true);
+  hotelElement.style.left = getRandomNumb(10, 300) + 'px';
 
   map.appendChild(hotelElement);
 }

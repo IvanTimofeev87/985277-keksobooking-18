@@ -55,7 +55,9 @@ var similarHotelTemplate = document.querySelector('#pin')
 
 for (var i = 0; i < 8; i++) {
   var hotelElement = similarHotelTemplate.cloneNode(true);
-  hotelElement.style.left = getRandomNumb(10, 300) + 'px';
-
+  var avatarImage = hotelElement.getElementsByTagName("img");
+  hotelElement.style.left = SAME_HOTEL_ARRAY[i].location.x + 'px';
+  hotelElement.style.top = SAME_HOTEL_ARRAY[i].location.y + 'px';
+  avatarImage[0].src = SAME_HOTEL_ARRAY[i].author.avatar;
   map.appendChild(hotelElement);
 }

@@ -1,14 +1,10 @@
 //Константы
-var TYPES_HOTEL = ['palace', 'flat', 'house', 'bungalo'];
+var TYPES_HOTEL = ['100', '200'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
 var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
 var ADDRESS_IMAGES = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 var SAME_HOTELS = makeSameHotelArray();
-var rrr = ['100', '200'];
-var ggg = ['201', '300'];
-var TYPES_HOTEL1 = ['100', '200'];
-var TYPES_HOTEL2 = ['201', '300'];
 
 //Функции
 function getRandomNumb(min, max) {
@@ -16,13 +12,20 @@ function getRandomNumb(min, max) {
 };
 
 function getRandomItem(array) {
-  return array[getRandomNumb(0, array.length - 1)];
+  return array[getRandomNumb(0, array.length)];
+};
+
+function getCoordinateX() {
+  return getRandomNumb(100, 200);
+};
+
+function getCoordinateY() {
+  return getRandomNumb(200, 300);
 };
 
 function getSameHotel(idx) {
-  var x = getRandomItem(rrr);
-  var y = getRandomItem(ggg);
-
+  var PIN_COORDINATE_X = getCoordinateX();
+  var PIN_COORDINATE_Y = getCoordinateY();
 
   return {
     author: {
@@ -31,7 +34,7 @@ function getSameHotel(idx) {
 
     offer: {
       title: "best room",
-      address: x + "," + y,
+      address: PIN_COORDINATE_X + "," + PIN_COORDINATE_Y,
       price: 1000,
       type: getRandomItem(TYPES_HOTEL),
       rooms: 3,
@@ -44,8 +47,8 @@ function getSameHotel(idx) {
     },
 
     location: {
-      x: x,
-      y: y,
+      x: PIN_COORDINATE_X,
+      y: PIN_COORDINATE_Y,
     }
   }
 };

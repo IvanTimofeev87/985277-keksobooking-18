@@ -61,7 +61,7 @@ function makeSameHotelArray() {
   return array;
 };
 
-function renderPin() {
+function createPins() {
 
   var Map = document.querySelector('.map');
   Map.classList.remove('map--faded');
@@ -81,3 +81,5 @@ function renderPin() {
   });
 
 };
+
+createPins();

@@ -13,6 +13,11 @@ var GuestsCount = {
 };
 
 //Константы
+var MAP = document.querySelector('.map');
+MAP.classList.remove('map--faded');
+var MAP_PIN_TEMPLATE = document.querySelector('#pin')
+  .content
+  .querySelector('.map__pin');
 var TYPES_HOTEL = ['100', '200'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
@@ -79,24 +84,15 @@ function mockAds() {
 };
 
 function createPins() {
-
-  var Map = document.querySelector('.map');
-  Map.classList.remove('map--faded');
-
-  var SimilarHotelTemplate = document.querySelector('#pin')
-    .content
-    .querySelector('.map__pin');
-
   SAME_HOTELS.forEach(function(item, i) {
-    var hotelElement = SimilarHotelTemplate.cloneNode(true);
+    var hotelElement = MAP_PIN_TEMPLATE.cloneNode(true);
     var avatarImage = hotelElement.getElementsByTagName("img");
     hotelElement.style.left = ((SAME_HOTELS[i].location.x) - 25) + 'px';
     hotelElement.style.top = ((SAME_HOTELS[i].location.y) - 70) + 'px';
     avatarImage[0].src = SAME_HOTELS[i].author.avatar;
     avatarImage[0].alt = SAME_HOTELS[i].offer.title;
-    Map.appendChild(hotelElement);
+    MAP.appendChild(hotelElement);
   });
-
 };
 
 createPins();

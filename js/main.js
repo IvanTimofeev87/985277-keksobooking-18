@@ -1,3 +1,17 @@
+//Перечисление
+var PricesOfHotels = {
+  MIN: 1000,
+  MAX: 4000,
+};
+var RoomsCount = {
+  MIN: 1,
+  MAX: 4,
+};
+var GuestsCount = {
+  MIN: 1,
+  MAX: 4,
+};
+
 //Константы
 var TYPES_HOTEL = ['100', '200'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
@@ -6,6 +20,7 @@ var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "co
 var ADDRESS_IMAGES = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 var BORDER_PINS = 9;
 var SAME_HOTELS = makeSameHotelArray();
+
 
 
 //Функции
@@ -26,8 +41,8 @@ function getCoordinateY() {
 };
 
 function getSameHotel(idx) {
-  var PIN_COORDINATE_X = getCoordinateX();
-  var PIN_COORDINATE_Y = getCoordinateY();
+  var pin_coordinate_x = getCoordinateX();
+  var pin_coordinate_y = getCoordinateY();
 
   return {
     author: {
@@ -36,11 +51,11 @@ function getSameHotel(idx) {
 
     offer: {
       title: "best room",
-      address: PIN_COORDINATE_X + "," + PIN_COORDINATE_Y,
-      price: 1000,
+      address: pin_coordinate_x + "," + pin_coordinate_y,
+      price: getRandomNumb(PricesOfHotels.MIN, PricesOfHotels.MAX),
       type: getRandomItem(TYPES_HOTEL),
-      rooms: 3,
-      guests: 2,
+      rooms: getRandomNumb(RoomsCount.MIN, RoomsCount.MAX),
+      guests: getRandomNumb(GuestsCount.MIN, GuestsCount.MAX),
       checkin: getRandomItem(TIME_CHECKIN),
       checkout: getRandomItem(TIME_CHECKOUT),
       features: getRandomItem(TYPES_FEATURES),
@@ -49,8 +64,8 @@ function getSameHotel(idx) {
     },
 
     location: {
-      x: PIN_COORDINATE_X,
-      y: PIN_COORDINATE_Y,
+      x: pin_coordinate_x,
+      y: pin_coordinate_y,
     }
   }
 };

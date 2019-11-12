@@ -4,7 +4,9 @@ var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
 var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
 var ADDRESS_IMAGES = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
+var BORDER_PINS = 9;
 var SAME_HOTELS = makeSameHotelArray();
+
 
 //Функции
 function getRandomNumb(min, max) {
@@ -54,9 +56,8 @@ function getSameHotel(idx) {
 };
 
 function makeSameHotelArray() {
-  var border_pins = 9;
   var array = [];
-  for (var i = 1; i < border_pins; i++) {
+  for (var i = 1; i < BORDER_PINS; i++) {
     array.push(getSameHotel(i));
   }
   return array;

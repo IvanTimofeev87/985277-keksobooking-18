@@ -16,11 +16,11 @@ function getRandomItem(array) {
 };
 
 function getCoordinateX() {
-  return getRandomNumb(100, 200);
+  return getRandomNumb(100, 900);
 };
 
 function getCoordinateY() {
-  return getRandomNumb(200, 300);
+  return getRandomNumb(130, 630);
 };
 
 function getSameHotel(idx) {
@@ -54,8 +54,9 @@ function getSameHotel(idx) {
 };
 
 function makeSameHotelArray() {
+  var border_pins = 9;
   var array = [];
-  for (var i = 1; i < 9; i++) {
+  for (var i = 1; i < border_pins; i++) {
     array.push(getSameHotel(i));
   }
   return array;

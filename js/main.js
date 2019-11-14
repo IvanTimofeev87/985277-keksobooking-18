@@ -18,6 +18,9 @@ MAP.classList.remove('map--faded');
 var MAP_PIN_TEMPLATE = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
+var POPUP_TEMPLATE = document.querySelector('#card')
+  .content
+  .querySelector('.popup');
 var TYPES_HOTEL = ['100', '200'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];

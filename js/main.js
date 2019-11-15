@@ -13,7 +13,7 @@ var GuestsCount = {
 };
 
 //Константы
-var MAP = document.querySelector('.map');
+var MAP = document.querySelector('.map__pins');
 MAP.classList.remove('map--faded');
 var MAP_PIN_TEMPLATE = document.querySelector('#pin')
   .content
@@ -21,7 +21,7 @@ var MAP_PIN_TEMPLATE = document.querySelector('#pin')
 var POPUP_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
-var TYPES_HOTEL = ['100', '200'];
+var TYPES_HOTEL = ['palace', 'flat', 'house', 'bungalo'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
 var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
@@ -99,3 +99,30 @@ function createPins() {
 };
 
 createPins();
+
+function selectionOfHotelTypes(type) {
+  if (type === flat) {
+    return Квартира;
+  } else if (type === bungalo) {
+    return Бунгало;
+  } else if (type === house) {
+    return Дом;
+  } else {
+    return Дворец;
+  }
+}
+
+function createPopup() {
+  var popupElement = POPUP_TEMPLATE.cloneNode(true);
+  var firstPin = SAME_HOTELS[0];
+  var adsType = firstPin.offer.type;
+  selectionOfHotelTypes(adsType);
+  var insertElementBefore = document.querySelector('map__filters-container');
+  popupElement.querySelector('.popup__title').textContent = firstPin.offer.title;
+  popupElement.querySelector('.popup__text--address').textContent = firstPin.offer.address;
+  popupElement.querySelector('.popup__text--price').textContent = firstPin.offer.price + '₽/ночь';
+  popupElement.querySelector('.popup__type').textContent = adsType;
+  MAP.insertBefore(popupElement, insertElementBefore);
+};
+
+createPopup();

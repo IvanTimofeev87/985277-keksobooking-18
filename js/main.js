@@ -101,14 +101,14 @@ function createPins() {
 createPins();
 
 function selectionOfHotelTypes(type) {
-  if (type === flat) {
-    return Квартира;
-  } else if (type === bungalo) {
-    return Бунгало;
-  } else if (type === house) {
-    return Дом;
+  if (type === 'flat') {
+    return 'Квартира';
+  } else if (type === 'bungalo') {
+    return 'Бунгало';
+  } else if (type === 'house') {
+    return 'Дом';
   } else {
-    return Дворец;
+    return 'Дворец';
   }
 }
 
@@ -116,12 +116,25 @@ function createPopup() {
   var popupElement = POPUP_TEMPLATE.cloneNode(true);
   var firstPin = SAME_HOTELS[0];
   var adsType = firstPin.offer.type;
-  selectionOfHotelTypes(adsType);
+  var popupElementImages = popupElement.getElementsByTagName("img");
+  var photosPopupContainer = popupElement.querySelector('.popup__photos');
+
+  ADDRESS_IMAGES.forEach(function(item, i) {
+    var photosPopup = popupElementImages[1].cloneNode(true);
+    photosPopup.src = ADDRESS_IMAGES[i];
+    photosPopupContainer.appendChild(photosPopup);
+  });
+
   var insertElementBefore = document.querySelector('map__filters-container');
   popupElement.querySelector('.popup__title').textContent = firstPin.offer.title;
   popupElement.querySelector('.popup__text--address').textContent = firstPin.offer.address;
   popupElement.querySelector('.popup__text--price').textContent = firstPin.offer.price + '₽/ночь';
-  popupElement.querySelector('.popup__type').textContent = adsType;
+  popupElement.querySelector('.popup__type').textContent = selectionOfHotelTypes(adsType);
+  popupElement.querySelector('.popup__text--capacity').textContent = firstPin.offer.rooms + ' комнаты для ' + firstPin.offer.guests + ' гостей';
+  popupElement.querySelector('.popup__text--time').textContent = 'Заезд после' + firstPin.offer.checkin + ', выезд до' + firstPin.offer.checkout;
+  popupElement.querySelector('.popup__description').textContent = firstPin.offer.description;
+  popupElementImages[0].src = firstPin.author.avatar;
+  photosPopupContainer.removeChild(photosPopupContainer.childNodes[1]);
   MAP.insertBefore(popupElement, insertElementBefore);
 };
 

@@ -31,6 +31,7 @@ var SAME_HOTELS = mockAds();
 
 
 
+
 //Функции
 function getRandomNumb(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -98,7 +99,7 @@ function createPins() {
   });
 };
 
-createPins();
+var HOTELS_TYPES = { flat: 'Квартира', bungalo: 'Бунгало', house: 'Дом', palace: 'Дворец' };
 
 function selectionOfHotelTypes(type) {
   if (type === 'flat') {
@@ -110,7 +111,7 @@ function selectionOfHotelTypes(type) {
   } else {
     return 'Дворец';
   }
-}
+};
 
 function createPopup() {
   var popupElement = POPUP_TEMPLATE.cloneNode(true);
@@ -138,4 +139,5 @@ function createPopup() {
   MAP.insertBefore(popupElement, insertElementBefore);
 };
 
+createPins();
 createPopup();

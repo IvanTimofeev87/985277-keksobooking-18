@@ -21,6 +21,7 @@ var MAP_PIN_TEMPLATE = document.querySelector('#pin')
 var POPUP_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
+var HOTELS_TYPES_DICTIONARY = { flat: 'Квартира', bungalo: 'Бунгало', house: 'Дом', palace: 'Дворец' };
 var TYPES_HOTEL = ['palace', 'flat', 'house', 'bungalo'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
@@ -99,23 +100,13 @@ function createPins() {
   });
 };
 
-var HOTELS_TYPES = { flat: 'Квартира', bungalo: 'Бунгало', house: 'Дом', palace: 'Дворец' };
-
 function selectionOfHotelTypes(type) {
-  if (type === 'flat') {
-    return 'Квартира';
-  } else if (type === 'bungalo') {
-    return 'Бунгало';
-  } else if (type === 'house') {
-    return 'Дом';
-  } else {
-    return 'Дворец';
-  }
-};
+  return HOTELS_TYPES_DICTIONARY[type];
+}
 
-function createPopup() {
+function createPopup(ad) {
   var popupElement = POPUP_TEMPLATE.cloneNode(true);
-  var firstPin = SAME_HOTELS[0];
+  var firstPin = ad;
   var adsType = firstPin.offer.type;
   var popupElementImages = popupElement.getElementsByTagName("img");
   var photosPopupContainer = popupElement.querySelector('.popup__photos');
@@ -140,4 +131,4 @@ function createPopup() {
 };
 
 createPins();
-createPopup();
+createPopup(SAME_HOTELS[0]);

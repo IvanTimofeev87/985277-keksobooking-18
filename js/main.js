@@ -109,14 +109,6 @@ function createPopup(ad) {
   var firstPin = ad;
   var adsType = firstPin.offer.type;
   var popupElementImages = popupElement.getElementsByTagName("img");
-  var photosPopupContainer = popupElement.querySelector('.popup__photos');
-
-  ADDRESS_IMAGES.forEach(function(item, i) {
-    var photosPopup = popupElementImages[1].cloneNode(true);
-    photosPopup.src = ADDRESS_IMAGES[i];
-    photosPopupContainer.appendChild(photosPopup);
-  });
-
   var insertElementBefore = document.querySelector('map__filters-container');
   popupElement.querySelector('.popup__title').textContent = firstPin.offer.title;
   popupElement.querySelector('.popup__text--address').textContent = firstPin.offer.address;
@@ -126,7 +118,7 @@ function createPopup(ad) {
   popupElement.querySelector('.popup__text--time').textContent = 'Заезд после' + firstPin.offer.checkin + ', выезд до' + firstPin.offer.checkout;
   popupElement.querySelector('.popup__description').textContent = firstPin.offer.description;
   popupElementImages[0].src = firstPin.author.avatar;
-  photosPopupContainer.removeChild(photosPopupContainer.childNodes[1]);
+  popupElementImages[1].src = firstPin.offer.photos;
   MAP.insertBefore(popupElement, insertElementBefore);
 };
 

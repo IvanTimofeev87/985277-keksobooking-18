@@ -29,6 +29,7 @@ var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "co
 var ADDRESS_IMAGES = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 var ADS_COUNT = 8;
 var SAME_HOTELS = mockAds();
+var AD_FILTER = document.querySelector('map__filters-container');
 
 
 
@@ -42,17 +43,9 @@ function getRandomItem(array) {
   return array[getRandomNumb(0, array.length)];
 };
 
-function getCoordinateX() {
-  return getRandomNumb(100, 900);
-};
-
-function getCoordinateY() {
-  return getRandomNumb(130, 630);
-};
-
 function getSameHotel(idx) {
-  var pin_coordinate_x = getCoordinateX();
-  var pin_coordinate_y = getCoordinateY();
+  var pin_coordinate_x = getRandomNumb(100, 900);
+  var pin_coordinate_y = getRandomNumb(130, 630);
 
   return {
     author: {
@@ -92,8 +85,8 @@ function createPins() {
   SAME_HOTELS.forEach(function(item, i) {
     var hotelElement = MAP_PIN_TEMPLATE.cloneNode(true);
     var avatarImage = hotelElement.getElementsByTagName("img");
-    hotelElement.style.left = ((SAME_HOTELS[i].location.x) - 25) + 'px';
-    hotelElement.style.top = ((SAME_HOTELS[i].location.y) - 70) + 'px';
+    hotelElement.style.left = (SAME_HOTELS[i].location.x - 25) + 'px';
+    hotelElement.style.top = (SAME_HOTELS[i].location.y - 70) + 'px';
     avatarImage[0].src = SAME_HOTELS[i].author.avatar;
     avatarImage[0].alt = SAME_HOTELS[i].offer.title;
     MAP.appendChild(hotelElement);
@@ -106,20 +99,18 @@ function selectionOfHotelTypes(type) {
 
 function createPopup(ad) {
   var popupElement = POPUP_TEMPLATE.cloneNode(true);
-  var firstPin = ad;
-  var adsType = firstPin.offer.type;
+  var adsType = ad.offer.type;
   var popupElementImages = popupElement.getElementsByTagName("img");
-  var insertElementBefore = document.querySelector('map__filters-container');
-  popupElement.querySelector('.popup__title').textContent = firstPin.offer.title;
-  popupElement.querySelector('.popup__text--address').textContent = firstPin.offer.address;
-  popupElement.querySelector('.popup__text--price').textContent = firstPin.offer.price + '₽/ночь';
+  popupElement.querySelector('.popup__title').textContent = ad.offer.title;
+  popupElement.querySelector('.popup__text--address').textContent = ad.offer.address;
+  popupElement.querySelector('.popup__text--price').textContent = ad.offer.price + '₽/ночь';
   popupElement.querySelector('.popup__type').textContent = selectionOfHotelTypes(adsType);
-  popupElement.querySelector('.popup__text--capacity').textContent = firstPin.offer.rooms + ' комнаты для ' + firstPin.offer.guests + ' гостей';
-  popupElement.querySelector('.popup__text--time').textContent = 'Заезд после' + firstPin.offer.checkin + ', выезд до' + firstPin.offer.checkout;
-  popupElement.querySelector('.popup__description').textContent = firstPin.offer.description;
-  popupElementImages[0].src = firstPin.author.avatar;
-  popupElementImages[1].src = firstPin.offer.photos;
-  MAP.insertBefore(popupElement, insertElementBefore);
+  popupElement.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
+  popupElement.querySelector('.popup__text--time').textContent = 'Заезд после' + ad.offer.checkin + ', выезд до' + ad.offer.checkout;
+  popupElement.querySelector('.popup__description').textContent = ad.offer.description;
+  popupElementImages[0].src = ad.author.avatar;
+  popupElementImages[1].src = ad.offer.photos;
+  MAP.insertBefore(popupElement, AD_FILTER);
 };
 
 createPins();

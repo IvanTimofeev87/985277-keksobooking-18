@@ -113,5 +113,15 @@ function createPopup(ad) {
   MAP.insertBefore(popupElement, AD_FILTER);
 };
 
+var POP_PROPERTIES = {
+  title: ad.offer.title,
+  'text--address': ad.offer.address,
+  'text--price': ad.offer.price + '₽/ночь',
+  type: selectionOfHotelTypes(adsType),
+  'text--capacity': ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей',
+  'text--time': 'Заезд после' + ad.offer.checkin + ', выезд до' + ad.offer.checkout,
+  description: ad.offer.description,
+};
+
 createPins();
 createPopup(SAME_HOTELS[0]);

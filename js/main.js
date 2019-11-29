@@ -102,7 +102,7 @@ function createPopup(ad) {
   var adsType = ad.offer.type;
   var popupElementImages = popupElement.getElementsByTagName("img");
 
-  var POP_PROPERTIES = {
+  var popupDescription = {
     title: ad.offer.title,
     'text--address': ad.offer.address,
     'text--price': ad.offer.price + '₽/ночь',
@@ -112,7 +112,7 @@ function createPopup(ad) {
     description: ad.offer.description,
   };
 
-  for (var [key, value] of Object.entries(POP_PROPERTIES)) {
+  for (var [key, value] of Object.entries(popupDescription)) {
     popupElement.querySelector('.popup__' + key).textContent = value;
   }
 

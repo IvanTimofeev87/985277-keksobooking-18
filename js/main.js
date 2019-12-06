@@ -1,5 +1,5 @@
 //Перечисление
-var PricesOfHotels = {
+var HotelPrice = {
   MIN: 1000,
   MAX: 4000,
 };
@@ -17,6 +17,8 @@ var Coordinate = {
   MAX_X: 900,
   MIN_Y: 130,
   MAX_Y: 630,
+  OFFSET_X: 25,
+  OFFSET_Y: 70,
 }
 
 //Константы
@@ -28,6 +30,7 @@ var MAP_PIN_TEMPLATE = document.querySelector('#pin')
 var POPUP_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
+var AD_FILTER = document.querySelector('map__filters-container');
 var HOTELS_TYPES_DICTIONARY = { flat: 'Квартира', bungalo: 'Бунгало', house: 'Дом', palace: 'Дворец' };
 var TYPES_HOTEL = ['palace', 'flat', 'house', 'bungalo'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
@@ -36,15 +39,6 @@ var TYPES_FEATURES = ["wifi", "dishwasher", "parking", "washer", "elevator", "co
 var ADDRESS_IMAGES = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 var ADS_COUNT = 8;
 var SAME_HOTELS = mockAds();
-var AD_FILTER = document.querySelector('map__filters-container');
-var MIN_СOORDINATE_X = 100;
-var MAX_СOORDINATE_X = 900;
-var MIN_СOORDINATE_Y = 130;
-var MAX_СOORDINATE_Y = 630;
-var OFFSET_X = 25;
-var OFFSET_Y = 70;
-
-
 
 
 //Функции
@@ -68,7 +62,7 @@ function getSameHotel(idx) {
     offer: {
       title: "best room",
       address: pinCoordinateX + "," + pinCoordinateY,
-      price: getRandomNumb(PricesOfHotels.MIN, PricesOfHotels.MAX),
+      price: getRandomNumb(HotelPrice.MIN, HotelPrice.MAX),
       type: getRandomItem(TYPES_HOTEL),
       rooms: getRandomNumb(RoomsCount.MIN, RoomsCount.MAX),
       guests: getRandomNumb(GuestsCount.MIN, GuestsCount.MAX),
@@ -95,27 +89,32 @@ function mockAds() {
 };
 
 function createPins() {
-  SAME_HOTELS.forEach(function(item, i) {
+
+  var fragment = document.createDocumentFragment();
+
+  SAME_HOTELS.forEach(function(item) {
     var hotelElement = MAP_PIN_TEMPLATE.cloneNode(true);
     var avatarImage = hotelElement.getElementsByTagName("img");
-    hotelElement.style.left = (item.location.x - OFFSET_X) + 'px';
-    hotelElement.style.top = (item.location.y - OFFSET_Y) + 'px';
+    hotelElement.style.left = (item.location.x - Coordinate.OFFSET_X) + 'px';
+    hotelElement.style.top = (item.location.y - Coordinate.OFFSET_Y) + 'px';
     avatarImage[0].src = item.author.avatar;
     avatarImage[0].alt = item.offer.title;
-    MAP.appendChild(hotelElement);
+    fragment.appendChild(hotelElement);
   });
+
+  MAP.appendChild(fragment);
 };
 
 function selectionOfHotelTypes(type) {
   return HOTELS_TYPES_DICTIONARY[type];
 }
 
-function iterateArrayOfObjectProperties(element, object) {
+function setElementContents(element, object) {
   var arrayOfObjectProperties = Object.entries(object);
 
-  for (var [key, value] of arrayOfObjectProperties) {
+  arrayOfObjectProperties.forEach(function([key, value]) {
     element.querySelector('.popup__' + key).textContent = value;
-  };
+  });
 
 };
 
@@ -136,7 +135,7 @@ function createPopup(ad) {
     description: ad.offer.description,
   };
 
-  iterateArrayOfObjectProperties(popupElement, popupDescription);
+  setElementContents(popupElement, popupDescription);
 
   popupElementImages[0].src = ad.author.avatar;
   popupElementImages[1].src = ad.offer.photos;
